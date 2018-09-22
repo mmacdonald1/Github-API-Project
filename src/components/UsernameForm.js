@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = (props) =>{
+const UsernameForm = (props) =>{
   return(
     <div>
       <form onSubmit={props.handleSubmit}>
@@ -14,4 +14,4 @@ const Form = (props) =>{
   )
 }
 
-export default Form
+export default UsernameForm
