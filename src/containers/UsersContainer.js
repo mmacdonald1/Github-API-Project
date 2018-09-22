@@ -1,11 +1,16 @@
 import React from "react";
 import UsernameForm from "../components/UsernameForm";
+import UserProfile from "../components/UserProfile"
 
 class UsersContainer extends React.Component{
   constructor(){
     super()
     this.state ={
-      username: ''
+      username: '',
+      name:'',
+      email:'',
+      publicRepos:''
+
     }
   }
   //as user inputs username this method is setting it to state
@@ -24,7 +29,8 @@ class UsersContainer extends React.Component{
       fetch(`https://api.github.com/users/${this.state.username}`)
       .then((resp)=> resp.json())
       .then((data)=> {
-        data.message === "Not Found" ? console.log("Username not found.") : console.log(data);
+        console.log(data)
+        data.message === "Not Found" ? console.log("Username not found.") : this.setState({name:data.name, email:data.email, publicRepos: data.public_repos});
       })
     }
     else{
@@ -36,6 +42,7 @@ class UsersContainer extends React.Component{
       <div>
         <h1>Find a Github User!</h1>
         <UsernameForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange}/>
+        <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos}/>
       </div>
     )
   }

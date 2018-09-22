@@ -6,7 +6,7 @@ import renderer from "react-test-renderer";
 describe('UsernameForm', () =>{
   it('renders correctly', () =>{
     const tree = renderer
-      .create(<Form />)
+      .create(<UsernameForm />)
       .toJSON()
     expect(tree).toMatchSnapshot();
   });
