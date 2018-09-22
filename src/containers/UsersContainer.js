@@ -23,7 +23,9 @@ class UsersContainer extends React.Component{
     if(username !== ""){
       fetch(`https://api.github.com/users/${this.state.username}`)
       .then((resp)=> resp.json())
-      .then((data)=> {console.log(data)})
+      .then((data)=> {
+        data.message === "Not Found" ? console.log("Username not found.") : console.log(data);
+      })
     }
     else{
       console.log("Please enter a valid username")
