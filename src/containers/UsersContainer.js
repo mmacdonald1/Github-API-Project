@@ -9,7 +9,8 @@ class UsersContainer extends React.Component{
       username: '',
       name:'',
       email:'',
-      publicRepos:''
+      publicRepos:'',
+      displayProfile: false
 
     }
   }
@@ -40,7 +41,7 @@ class UsersContainer extends React.Component{
         }
         else{
           //if not 404 create state obj from returned data
-          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos}
+          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos, displayProfile:true}
           //Take the keys of the user object and for each key check if the value is null. If it is then replace it with "none".
           Object.keys(userObj).forEach(function(key) {
             if(userObj[key] === null) {
@@ -58,11 +59,18 @@ class UsersContainer extends React.Component{
     }
   }
   render(){
+    let profile
+    if(this.state.displayProfile === true){
+      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos}/>
+    }
+    else{
+      profile=""
+    }
     return(
       <div>
         <h1>Find a Github User!</h1>
         <UsernameForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange}/>
-        <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos}/>
+        {profile}
       </div>
     )
   }
