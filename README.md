@@ -9,7 +9,7 @@ These instructions will allow you to run this project in your local environment.
 Clone the repository onto your local machine.
 
 ```
-git clone <git repository url or ssh url>
+git clone git@github.com:mmacdonald1/Github-API-Project.git
 ```
 Navigate into the file folder and install the dependencies.
 
@@ -24,7 +24,7 @@ npm start
 ```
 ## Built With 
 * React - framework
-* Reactstrap - package that integrate the Bootstrap styling libary with React
+* Reactstrap - package that integrates the Bootstrap styling libary with React
 
 
 
