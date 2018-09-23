@@ -1,15 +1,20 @@
 import React from "react";
-import { Alert } from 'reactstrap';
+import { Card, CardTitle, CardText, Button, CardImg } from 'reactstrap';
 
 
 const UserProfile = (props) => {
-  const {name, email, publicRepos, username} = props
+  const {name, email, publicRepos, username, githubProfile, img} = props
    return(
      <div>
-        <h1>Name: {name}</h1>
-        <h2>Username: {username}</h2>
-        <h2>Email: {email}</h2>
-        <h2>Number of Public Repos: {publicRepos}</h2>
+        <Card body>
+          <CardImg top width="100%" src={img} alt="Card image cap" />
+          <br />
+          <CardTitle>Name: {name}</CardTitle>
+          <CardText>Username: {username}</CardText>
+          <CardText>Email: {email}</CardText>
+          <CardText>Number of Public Repos: {publicRepos}</CardText>
+          <Button href={githubProfile}>Go to {username}'s Github </Button>
+        </Card>
      </div>
    )
 }

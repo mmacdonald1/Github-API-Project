@@ -11,7 +11,9 @@ class UsersContainer extends React.Component{
       email:'',
       publicRepos:'',
       displayProfile: false,
-      error:false
+      error:false,
+      githubProfile: '',
+      img:''
 
     }
   }
@@ -42,7 +44,7 @@ class UsersContainer extends React.Component{
         }
         else{
           //if not 404 create state obj from returned data
-          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos, displayProfile:true, error:false}
+          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos, displayProfile:true, error:false, githubProfile: data.html_url, img: data.avatar_url}
           //Take the keys of the user object and for each key check if the value is null. If it is then replace it with "none".
           Object.keys(userObj).forEach(function(key) {
             if(userObj[key] === null) {
@@ -63,7 +65,7 @@ class UsersContainer extends React.Component{
     //only render profile if fetch has brought back a user and we have assigned state
     let profile
     if(this.state.displayProfile === true){
-      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos} username={this.state.username} />
+      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos} username={this.state.username} githubProfile={this.state.githubProfile} img={this.state.img}/>
     }
     else{
       profile=""
@@ -71,7 +73,6 @@ class UsersContainer extends React.Component{
 
     return(
       <div>
-        <h1>Find a Github User!</h1>
         <UsernameForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange} error={this.state.error}/>
         {profile}
       </div>
