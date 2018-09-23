@@ -43,7 +43,9 @@ class UsersContainer extends React.Component{
           let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos}
           //Take the keys of the user object and for each key check if the value is null. If it is then replace it with "none".
           Object.keys(userObj).forEach(function(key) {
-            userObj[key] === null ? userObj[key] = 'none': userObj[key]
+            if(userObj[key] === null) {
+              userObj[key] = 'none'
+            }
           })
           //set state values to the filtered data
           this.setState(userObj);
