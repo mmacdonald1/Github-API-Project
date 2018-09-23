@@ -1,14 +1,21 @@
 import React from "react";
+import { Button, Alert } from 'reactstrap';
 
 const UsernameForm = (props) =>{
+  const {handleChange, handleSubmit, error} = props
+  let errorMessage
+  if(error !== false){
+    errorMessage= <Alert color="primary">{error}</Alert>
+  }
   return(
     <div>
-      <form onSubmit={props.handleSubmit}>
+    {errorMessage}
+      <form onSubmit={handleSubmit}>
         <label>Enter Github Username:</label>
         <br />
-        <input type="text" onChange={props.handleChange}/>
+        <input type="text" onChange={handleChange}/>
         <br />
-        <button>Submit</button>
+        <Button>Submit</Button>
       </form>
     </div>
   )

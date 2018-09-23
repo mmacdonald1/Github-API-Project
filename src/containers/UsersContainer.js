@@ -10,7 +10,8 @@ class UsersContainer extends React.Component{
       name:'',
       email:'',
       publicRepos:'',
-      displayProfile: false
+      displayProfile: false,
+      error:false
 
     }
   }
@@ -37,12 +38,11 @@ class UsersContainer extends React.Component{
         console.log(data)
         //if 404 then display Username not found
         if(data.message === "Not Found"){
-          console.log("Username not found.")
-          this.setState({displayProfile:false})
+          this.setState({displayProfile:false, error:"Username not found."})
         }
         else{
           //if not 404 create state obj from returned data
-          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos, displayProfile:true}
+          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos, displayProfile:true, error:false}
           //Take the keys of the user object and for each key check if the value is null. If it is then replace it with "none".
           Object.keys(userObj).forEach(function(key) {
             if(userObj[key] === null) {
@@ -56,22 +56,23 @@ class UsersContainer extends React.Component{
     }
     else{
       //If username is and empty string tell user to enter a username
-      console.log("Please enter a valid username")
+      this.setState({error:"Please enter a valid username"})
     }
   }
   render(){
     //only render profile if fetch has brought back a user and we have assigned state
     let profile
     if(this.state.displayProfile === true){
-      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos} username={this.state.username}/>
+      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos} username={this.state.username} />
     }
     else{
       profile=""
     }
+
     return(
       <div>
         <h1>Find a Github User!</h1>
-        <UsernameForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange}/>
+        <UsernameForm handleSubmit={this.handleFormSubmit} handleChange={this.handleFormChange} error={this.state.error}/>
         {profile}
       </div>
     )
