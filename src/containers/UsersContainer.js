@@ -34,10 +34,11 @@ class UsersContainer extends React.Component{
       fetch(`https://api.github.com/users/${this.state.username}`)
       .then((resp)=> resp.json())
       .then((data)=> {
-
+        console.log(data)
         //if 404 then display Username not found
         if(data.message === "Not Found"){
           console.log("Username not found.")
+          this.setState({displayProfile:false})
         }
         else{
           //if not 404 create state obj from returned data
@@ -59,9 +60,10 @@ class UsersContainer extends React.Component{
     }
   }
   render(){
+    //only render profile if fetch has brought back a user and we have assigned state
     let profile
     if(this.state.displayProfile === true){
-      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos}/>
+      profile = <UserProfile name={this.state.name} email={this.state.email} publicRepos={this.state.publicRepos} username={this.state.username}/>
     }
     else{
       profile=""
