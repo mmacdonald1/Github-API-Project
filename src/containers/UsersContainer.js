@@ -20,20 +20,38 @@ class UsersContainer extends React.Component{
     this.setState({username: username})
   }
 
-  //when user presses submit this method uses the value in state to query github API and return the user object
+  //when user presses submit this method uses the value in state to query github API, return the user object, filter for null, then set values to state
   handleFormSubmit = (e) => {
     e.preventDefault()
+
+    //take username from state and cut out spaces
     let username = this.state.username
     username = username.replace(/\s+/g,'')
+
+    //if username is not an empty string then fetch data
     if(username !== ""){
       fetch(`https://api.github.com/users/${this.state.username}`)
       .then((resp)=> resp.json())
       .then((data)=> {
-        console.log(data)
-        data.message === "Not Found" ? console.log("Username not found.") : this.setState({name:data.name, email:data.email, publicRepos: data.public_repos});
+
+        //if 404 then display Username not found
+        if(data.message === "Not Found"){
+          console.log("Username not found.")
+        }
+        else{
+          //if not 404 create state obj from returned data
+          let userObj = {name: data.name, email: data.email, publicRepos: data.public_repos}
+          //Take the keys of the user object and for each key check if the value is null. If it is then replace it with "none".
+          Object.keys(userObj).forEach(function(key) {
+            userObj[key] === null ? userObj[key] = 'none': userObj[key]
+          })
+          //set state values to the filtered data
+          this.setState(userObj);
+        }
       })
     }
     else{
+      //If username is and empty string tell user to enter a username
       console.log("Please enter a valid username")
     }
   }

@@ -6,8 +6,8 @@ const UserProfile = (props) => {
    return(
      <div>
         <h1>{name}</h1>
-        <h2>{email}</h2>
-        <h2>{publicRepos}</h2>
+        <h2>Email: {email}</h2>
+        <h2>Number of Public Repos: {publicRepos}</h2>
      </div>
    )
 }
