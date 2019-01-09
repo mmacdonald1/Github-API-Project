@@ -2,6 +2,8 @@
 
 A simple app that takes in a Github username and outputs a small user profile and a button to go to the user's github.
 
+See it live: https://gitapiproject.herokuapp.com/
+
 ## Getting Started
 
 These instructions will allow you to run this project in your local environment. 
