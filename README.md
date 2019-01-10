@@ -2,7 +2,7 @@
 
 A simple app that takes in a Github username and outputs a small user profile and a button to go to the user's github.
 
-See it live: https://gitapiproject.herokuapp.com/
+See it live: https://mmacdonald1.github.io/Github-API-Project/
 
 ## Getting Started
 
